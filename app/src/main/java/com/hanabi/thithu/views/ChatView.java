@@ -2,6 +2,7 @@ package com.hanabi.thithu.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.LinearLayout;
@@ -12,6 +13,9 @@ import androidx.annotation.Nullable;
 import com.hanabi.thithu.R;
 
 public class ChatView extends LinearLayout {
+
+    public static int MESS_MY = 1;
+    public static int MESS_YOUR = 0;
 
     private TextView tvContent;
 
@@ -48,8 +52,17 @@ public class ChatView extends LinearLayout {
         tvContent.setText(text);
     }
 
-    public void setBackground(int id) {
-        tvContent.setBackgroundResource(id);
+    public void setStyle(int id) {
+        switch (id) {
+            case 1:
+                tvContent.setBackgroundResource(R.drawable.bg_mess_my);
+                tvContent.setTextColor(Color.WHITE);
+                break;
+            case 0:
+                tvContent.setBackgroundResource(R.drawable.bg_mess_your);
+                tvContent.setTextColor(Color.BLACK);
+                break;
+        }
     }
 
 }

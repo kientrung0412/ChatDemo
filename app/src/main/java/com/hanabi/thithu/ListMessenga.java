@@ -24,12 +24,12 @@ public class ListMessenga extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_mess);
 
         ArrayList<Message> messages = new ArrayList<>();
+        messages.add(new Message(1, 1, "asfdt ayfd a sga adastyerc at uasduyt auduatdu ah iada ady uiasgd daj djk a"));
+        messages.add(new Message(1, 2, "asfđádt ayfd adá đá  sga asgd daj djk a"));
+        messages.add(new Message(1, 1, "asfdt ayfd a sgaá dá  asgd daj djk a"));
+        messages.add(new Message(1, 1, "asfádasdt ayfd a sgda sda asgd daj djk a"));
         messages.add(new Message(1, 1, "asfdt ayfd a sga asgd daj djk a"));
-        messages.add(new Message(1, 2, "asfdt ayfd a sga asgd daj djk a"));
-        messages.add(new Message(1, 1, "asfdt ayfd a sga asgd daj djk a"));
-        messages.add(new Message(1, 1, "asfdt ayfd a sga asgd daj djk a"));
-        messages.add(new Message(1, 1, "asfdt ayfd a sga asgd daj djk a"));
-        messages.add(new Message(1, 2, "asfdt ayfd a sga asgd daj djk a"));
+        messages.add(new Message(1, 2, "asfdt ayfd a sá dá gđáa asgd daj djk a"));
         messages.add(new Message(1, 1, "asfdt ayfd a sga asgd daj djk a"));
 
         adapter = new MessageAdapter(getLayoutInflater());

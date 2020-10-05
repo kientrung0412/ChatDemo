@@ -83,11 +83,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.HolderMe
             chatView.setText(message.getMessage());
 
             if (message.getIdUserName() == 1) {
-                chatView.setBackground(R.drawable.bg_mess_your);
+                chatView.setStyle(ChatView.MESS_MY);
                 chatView.setGravity(Gravity.RIGHT);
                 return;
             }
-            chatView.setBackground(R.drawable.bg_mess_my);
+            chatView.setStyle(ChatView.MESS_YOUR);
         }
     }
 
