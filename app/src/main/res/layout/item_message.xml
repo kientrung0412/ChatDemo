@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/t_content"
+        android:text="ahjsgdjhasgdhjg ahgdjas as sab asdasb dbsn xb absdbas asbd jasdjka sajs as bdas jdsahd kjahsd kjhasd ash asaj jkahd jas dasj as djas ak da k"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:padding="8dp">
+        
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="invisible" />
+
+</LinearLayout>
