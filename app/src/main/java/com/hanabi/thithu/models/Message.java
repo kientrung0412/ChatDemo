@@ -1,13 +1,19 @@
 package com.hanabi.thithu.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Message {
 
+    @SerializedName("id")
     private int id;
+    @SerializedName("username")
     private int idUserName;
+    @SerializedName("message")
     private String message;
-    private Date createAt;
+    @SerializedName("pub_date")
+    private String createAt;
 
     public Message() {
     }
@@ -42,11 +48,11 @@ public class Message {
         this.message = message;
     }
 
-    public Date getCreateAt() {
+    public String getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
 }
