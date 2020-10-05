@@ -11,7 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.hanabi.thithu.api.Api;
+import com.hanabi.thithu.api.ApiBuilder;
+import com.hanabi.thithu.utils.DialogUtils;
+
 import java.util.regex.Pattern;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ReginsterActivity extends BaseActivity implements View.OnClickListener {
 
@@ -34,7 +43,6 @@ public class ReginsterActivity extends BaseActivity implements View.OnClickListe
     private void initViews() {
         edtUsername = findViewById(R.id.edt_username);
         edtPassword = findViewById(R.id.edt_password);
-        edtEmail = findViewById(R.id.edt_email);
         edtRePass = findViewById(R.id.edt_re_password);
         btnCancel = findViewById(R.id.btn_cancel);
         btnSignIn = findViewById(R.id.btn_sign_in);
@@ -47,22 +55,13 @@ public class ReginsterActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_sign_in:
-                Pattern patternMail = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+
                 Pattern patternUsername = Pattern.compile("[^a-z ]");
 
-                String username = edtUsername.getText().toString();
-                String password = edtPassword.getText().toString();
+                final String username = edtUsername.getText().toString();
+                final String password = edtPassword.getText().toString();
                 String rePassword = edtRePass.getText().toString();
-                String email = edtEmail.getText().toString();
 
-                if (email.isEmpty()) {
-                    edtEmail.setError("Can not empty");
-                    break;
-                }
-                if (!patternMail.matcher(email).matches()) {
-                    edtEmail.setError("Wrong format");
-                    break;
-                }
                 if (username.isEmpty()) {
                     edtUsername.setError("Can not empty");
                     break;
@@ -83,7 +82,21 @@ public class ReginsterActivity extends BaseActivity implements View.OnClickListe
                     edtRePass.setError("Re password not equal password");
                     break;
                 }
-                changeLogin(username, password);
+                DialogUtils dialogUtils = new DialogUtils();
+                dialogUtils.show(this);
+                ApiBuilder.getInstance().register(username, password, "trung").enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        changeLogin(username, password);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(ReginsterActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+                dialogUtils.dismiss();
                 break;
             case R.id.btn_cancel:
                 finish();

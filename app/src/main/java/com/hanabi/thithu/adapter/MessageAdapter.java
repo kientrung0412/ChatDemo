@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hanabi.thithu.models.Message;
 import com.hanabi.thithu.R;
+import com.hanabi.thithu.models.User;
 import com.hanabi.thithu.views.ChatView;
 
 
@@ -21,9 +22,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.HolderMe
     private LayoutInflater layoutInflater;
     private ArrayList<Message> data;
     private OnClickMessageListener listener;
+    private User user;
 
-    public MessageAdapter(LayoutInflater layoutInflater) {
+    public MessageAdapter(LayoutInflater layoutInflater, User user) {
         this.layoutInflater = layoutInflater;
+        this.user = user;
     }
 
     public void setListener(OnClickMessageListener listener) {
@@ -82,7 +85,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.HolderMe
 
             chatView.setText(message.getMessage());
 
-            if (message.getIdUserName() == 1) {
+            if (message.getUsername().equals(user.getUsername())) {
                 chatView.setStyle(ChatView.MESS_MY);
                 chatView.setGravity(Gravity.RIGHT);
                 return;

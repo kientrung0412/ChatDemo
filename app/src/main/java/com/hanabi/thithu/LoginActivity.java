@@ -5,13 +5,21 @@ import androidx.appcompat.app.AlertDialog;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+import com.hanabi.thithu.api.ApiBuilder;
+import com.hanabi.thithu.models.User;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class LoginActivity extends BaseActivity implements View.OnClickListener, Callback<User> {
 
     public static final int REQUEST_CODE_LOGIN = 1;
 
@@ -51,7 +59,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     showAlertDialog();
                     break;
                 }
-                Toast.makeText(this, String.format("Username: %s, password: %s", username, password), Toast.LENGTH_SHORT).show();
+
+                ApiBuilder.getInstance().login(username, password).enqueue(this);
+
                 break;
             case R.id.btn_ok:
                 dialog.dismiss();
@@ -93,5 +103,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 edtPassword.setText(data.getStringExtra(ReginsterActivity.EXTRA_PASSWORD));
             }
         }
+    }
+
+    @Override
+    public void onResponse(Call<User> call, Response<User> response) {
+        User user = response.body();
+        Intent intent = new Intent(this, ListMessenga.class);
+        intent.putExtra(User.class.getName(), user);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onFailure(Call<User> call, Throwable t) {
+        Toast.makeText(this, t.getMessage(), Toast.LENGTH_SHORT).show();
     }
 }

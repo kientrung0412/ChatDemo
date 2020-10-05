@@ -1,8 +1,12 @@
 package com.hanabi.thithu.api;
 
 import com.hanabi.thithu.models.Message;
+import com.hanabi.thithu.models.MessageResponse;
 import com.hanabi.thithu.models.User;
 
+import java.util.ArrayList;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Field;
@@ -21,7 +25,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("register.php")
-    Call<Response> login(
+    Call<ResponseBody> register(
             @Field("username") String username,
             @Field("password") String password,
             @Field("name") String name
@@ -29,12 +33,12 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("chat.php")
-    Call<Response> chat(
+    Call<ResponseBody> chat(
             @Field("username") String username,
             @Field("message") String message
     );
 
     @GET("list-chat.php")
-    Call<Message> listChat();
+    Call<ArrayList<Message>> listChat();
 
 }
