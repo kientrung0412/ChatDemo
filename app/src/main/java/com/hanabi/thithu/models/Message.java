@@ -9,6 +9,15 @@ public class Message {
     private String message;
     private Date createAt;
 
+    public Message() {
+    }
+
+    public Message(int id, int idUserName, String message) {
+        this.id = id;
+        this.idUserName = idUserName;
+        this.message = message;
+    }
+
     public int getId() {
         return id;
     }

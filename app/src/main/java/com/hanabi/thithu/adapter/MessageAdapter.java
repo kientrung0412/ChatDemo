@@ -1,17 +1,17 @@
 package com.hanabi.thithu.adapter;
 
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hanabi.thithu.models.Message;
 import com.hanabi.thithu.R;
+import com.hanabi.thithu.views.ChatView;
 
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.HolderMe
     @NonNull
     @Override
     public HolderMessage onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.item_message, parent, false);
+        View view = layoutInflater.inflate(R.layout.chat_item, parent, false);
         return new HolderMessage(view);
     }
 
@@ -71,13 +71,23 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.HolderMe
 
     public class HolderMessage extends RecyclerView.ViewHolder {
 
+        private ChatView chatView;
+
         public HolderMessage(@NonNull View itemView) {
             super(itemView);
-
+            chatView = itemView.findViewById(R.id.cv_chat);
         }
 
         private void bindView(Message message) {
 
+            chatView.setText(message.getMessage());
+
+            if (message.getIdUserName() == 1) {
+                chatView.setBackground(R.drawable.bg_mess_your);
+                chatView.setGravity(Gravity.RIGHT);
+                return;
+            }
+            chatView.setBackground(R.drawable.bg_mess_my);
         }
     }
 
